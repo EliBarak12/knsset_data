@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('kn-image.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#login-box {
+    width: 400px;
+    height: 400px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: transparent;
+    text-align:center;
+    display: flex;
+    margin-left: 60%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: normal;
+}
+
+.button-container {
+    margin: 10px;
+    width: 100%; /* Added to make the buttons stack vertically */
+    text-align: center; /* Center-align the buttons */
+}
+
+
+button {
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 5px 20px;
+    margin: 0 5px;
+}
+
+.registration-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 40px;
+    padding: 20px;
+    margin: 10px;
+    animation: frombutton 1s ;
+}
+
+.login-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 40px;
+    padding: 20px;
+    margin: 10px;
+    animation: frombutton 1s ;
+}
+
+input {
+    margin: 5px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    direction: rtl;
+}
+
+@keyframes frombutton{
+    0% {
+        transform: translateY(15vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0vh);
+        opacity: 1;
+    }
+}
+
+.webText {
+    color: rgb(7, 7, 7);
+    font-size: 60px;
+    position: absolute;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    animation: riseBottom 15s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes riseBottom {
+    0% {
+        transform: translateY(-35vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+}
