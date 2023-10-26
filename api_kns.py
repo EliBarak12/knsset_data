@@ -24,12 +24,33 @@ def update_bill_vote(data):
 
     conn.commit()
     conn.close()
+def update_parties_vote(data):
+    conn = sqlite3.connect("billsParties_database1.db")
+    cursor = conn.cursor()
+    bill_id_to_update = data['BillID']
+    party_to_up = data['party']
+    cursor.execute(
+        "UPDATE BillPart SET  " + party_to_up + " = " + party_to_up + "+ 1 WHERE BillID = ?",
+        (bill_id_to_update,))
+
+    conn.commit()
+    conn.close()
+
+def sort_bills_by_interest(data):
+    sorted_data = sorted(data, key=lambda x: x['total_vote'], reverse=True)
+    return sorted_data
+
 
 @app.route('/api/update_data', methods=['POST'])
 def update_data():
     try:
         authenticate_request()
         data = request.get_json()
+
+        update_bill_vote(data)
+        update_parties_vote(data)
+
+
 
         response = {'message': 'Data updated successfully'}
         return jsonify(response), 200
@@ -103,8 +124,10 @@ def get_data_parties_from_db():
 @app.route('/api/data_bills', methods=['GET'])
 def api_data():
     data = get_data_bills_from_db()
-    response = json.dumps(data, ensure_ascii=False).encode('utf8')
+    sorted_data = sort_bills_by_interest(data)
+    response = json.dumps(sorted_data, ensure_ascii=False).encode('utf8')
     return response
+
 
 @app.route('/api/data_parties', methods=['GET'])
 def api_data_parties():
@@ -115,3 +138,6 @@ def api_data_parties():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
